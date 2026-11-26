@@ -1,7 +1,6 @@
 package com.example.cincuentazo.model;
 
 import java.util.ArrayDeque;
-import java.util.ArrayList;
 
 public class Model {
 
@@ -9,11 +8,6 @@ public class Model {
      * <p>represents the cards that haven't been drawn, in whatever order they were shuffled
      */
     private ArrayDeque<Integer> deck;
-    private ArrayList<Card> cardsOnGame = new ArrayList<>();
-
-    public Player player;
-    public ArrayList<Machine> machines;
-    int turn = 0;
 
     /** List of all cards in game, with a fixed order
      * <p>Used for assigning every possible card a unique address in memory and a unique index
@@ -47,53 +41,9 @@ public class Model {
     }
 
     /**
-     * Public method that makes the machines play a card, does nothing on the player's turn
-     * @return False if the sum exceeds 50
-     */
-    public boolean nextTurn(){
-        if (turn == machines.size()){
-            turn = 0;
-            return true;
-        }
-        cardsOnGame.add(machines.get(0).removeCard());
-        if (getSum() > 50){
-            return false;
-        }
-        return true;
-    }
-
-    public int getSum(){
-        int sum = 0;
-        for (Card card: cardsOnGame){
-            sum += card.getMinValue();
-        }
-        return sum;
-    }
-
-    /**
-     * Public method for assigning every player four random cards
-     */
-    public void startGame(){
-        for (Machine m : machines){
-            for (int i = 0; i < 4; i++) {
-                m.addCard(drawCard());
-            }
-        }
-        for (int i = 0; i < 4; i++) {
-            player.addCard(drawCard());
-        }
-    }
-
-    /**
      * Initializes every card's value in the cards list
-     * @param botsNumber The number of bots to be added
      */
-    Model(int botsNumber){
-
-        for (int i = 0; i < botsNumber; i++)
-        {
-            machines.add(new Machine());
-        }
+    Model(){
         for (int suit = 0; suit < 4; suit++){
             for (int i = 0; i < 13; i++){
                 char symbol;
