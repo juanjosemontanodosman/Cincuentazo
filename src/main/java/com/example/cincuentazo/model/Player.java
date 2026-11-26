@@ -15,6 +15,23 @@ public class Player {
     public ArrayList<Card> getHand(){ return hand; }
 
     /**
+     * Adds a card to the player's hand
+     * @param card the card
+     */
+    public void addCard(Card card){
+        hand.add(card);
+    }
+
+    /**
+     * Returns a specific card with an index and removes it from the hand
+     * @param index The index of the selected card
+     * @return The card that was removed
+     */
+    public Card removeCard(int index){
+        return hand.remove(index);
+    }
+
+    /**
      * Returns the card with the lowest value that a player can select
      * <p> for validating if the player can continue without exceeding the 50 limit
      * @return The value of such card
